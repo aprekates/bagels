@@ -1,0 +1,105 @@
+    CLS
+    PRINT «ΚΟΥΛΟΥΡΙΑ»
+    PRINT «CREATIVE COMPUTING MORRISTOWN, NEW JERSEY»:PRINT:PRINT
+    REM *** Παιχνίδι μαντέματος αριθμών (bagels)
+    REM *** Αρχικός πηγαίος κώδικας D.Resek, P.Rowe
+    REM *** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
+    REM *** Μετατροπή από vintage basic σε basic256 : Πρεκατές Αλέξανδρος , aprekates@sch.gr
+    DIM A1(6)
+    DIM A(3)
+    DIM B(3)
+    Y=0:T=255
+    PRINT:PRINT:PRINT
+    INPUT «Θέλεις να μάθεις το κανόνες (ΝΑΙ ή ΟΧΙ) : «,A$
+    IF LEFT(A$,1)=»Ν» THEN
+    PRINT:PRINT «Σκέφομαι έναν τριψήφιο αριθμό . Προσπάθησε να τον μαντέψεις»
+    PRINT «τον αριθμό μου και θα σου δίνω στοιχεία ως εξής:»
+    PRINT » Πίκο – Ένα ψηφίο σωστό αλλά σε λάθος θέση.»
+    PRINT » Φέρμι – Ένα ψηφίο σωστό και στη σωστή θέση.»
+    PRINT » ΚΟΥΛΟΥΡΑ!! – Δεν βρήκες τίποτε.»
+    end if
+    B1:
+    FOR I=0 TO 2
+    B4:
+    A[I]=INT(10*RAND())
+    IF I=0 THEN GOTO B2
+    FOR J=0 TO I-1
+    IF A[I]=A[J] THEN GOTO B4
+    NEXT J
+    B2:
+    NEXT I
+    PRINT:PRINT «Εντάξει , σκέφτηκα έναν αριθμό.»
+    FOR I=1 TO 20
+    B8:
+    PRINT «Μαντεψιά #» ; : PRINT I
+    REM ο πίνακας A$ περιέχει το την είσοδο που δίνει ο χρήστης κάθε φορά που μαντεύει και η οποία έχει τη μορφή τριών χαρακτήρων. Ο Α1 περιέχει τις τιμές ASCII αυτών των χαρακτήρων και αφού γίνει ο έλεγχος στον Α1 ότι έχουμε μόνο αριθμητικούς χαρακτήρες τότε ο Β περιέχει τις αριθμητικές τιμές αυτών.
+    INPUT A$
+    IF LENGTH(A$) <> 3 THEN GOTO B3
+    FOR Z=0 TO 2 : A1[Z]=ASC(MID(A$,Z+1,1)):NEXT Z
+    FOR J=0 TO 2
+    IF A1[J]<48 THEN GOTO B6
+    IF A1[J]>57 THEN GOTO B6
+    B[J]=A1[J]-48
+    NEXT J
+    GOTO B7
+    B6:
+    PRINT «WHAT?»
+    GOTO B8
+    B7:
+    IF B[0]=B[1] THEN GOTO B9
+    IF B[1]=B[2] THEN GOTO B9
+    IF B[2]=B[0] THEN GOTO B9
+    C=0:D=0
+    FOR J=0 TO 1
+    IF A[J]<>B[J+1] THEN GOTO B10
+    C=C+1
+    B10:
+    IF A[J+1]<>B[J] THEN GOTO B11
+    C=C+1
+    B11:
+    NEXT J
+    IF A[0]<>B[2] THEN GOTO B12
+    C=C+1
+    B12:
+    IF A[2]<>B[0] THEN GOTO B13
+    C=C+1
+    B13:
+    FOR J=0 TO 2
+    IF A[J]<>B[J] THEN GOTO B14
+    D=D+1
+    B14:
+    NEXT J
+    IF D=3 THEN GOTO B15
+    IF C=0 THEN GOTO B16
+    FOR J=1 TO C
+    PRINT «Πίκο «;
+    NEXT J
+    B16:
+    IF D=0 THEN GOTO B17
+    FOR J=1 TO D
+    PRINT «Φέρμι «;
+    NEXT J
+    B17:
+    IF C+D<>0 THEN GOTO B18
+    PRINT «ΚΟΥΛΟΥΡΑ»;
+    B18:
+    PRINT
+    NEXT I
+    PRINT «Δεν τα κατάφερες. »
+    PRINT «Μάντεψες είκοσι φορές. Ο αριθμός μου ήταν ο : «; : PRINT 100*A[1]+10*A[2]+A[3]
+    GOTO B19
+    B3:
+    PRINT «Προσπάθησε να μαντέψεις ένας τριψήφιο αριθμό.»:GOTO B8
+    B9:
+    PRINT «Ξέχασα να σου πω ότι ο αριθμός που έχω στον ηλεκτρονικό μου εγκέφαλο δεν έχει δυο ψηφία ίδια»:GOTO B8
+    B15:
+    PRINT «ΣΥΓΧΑΡΗΤΗΡΙΑ ΤΟ ΒΡΗΚΕΣ!!!»:PRINT
+    Y=Y+1
+    B19:
+    INPUT «Θέλεις να ξαναπαίξεις (Ναι ή Οχι)»,A$
+    IF LEFT(A$,1)=»Ν» THEN GOTO B1
+    IF Y=0 THEN GOTO B20
+    PRINT:PRINT «A»; : PRINT Y ; : PRINT » πόντοι για σένα!»
+    B20:
+    PRINT «Ελπίζω να το διασκέδασες! Γειά σου.»
+    END
